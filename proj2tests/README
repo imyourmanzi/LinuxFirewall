@@ -1,0 +1,58 @@
+Project 2: Firewalls - Testing
+==============================
+
+ORGANIZATION
+
+This directory contains my 'assert' library functions, wrappers, and supporting
+code.  It has a file named "eguide.csv" that provides a guideline for pairing
+error messages with the expected 'errno' value.  Next, there is a Makefile to
+build and run tests, see MAKEFILE RULES for details.  Finally, there are various
+shell scripts (prefixed with "s_" or "t_") that serve as the tests, see TESTS
+for more information.
+
+One thing that is important to note: this Makefile/testing structure is a bit
+fragile.  If tests are not built from the proj2tests directory with an adjacent
+proj2driver directory, you may receive unexpected or improper results.  Two
+particular cases to note: 1) running ``make`` in the proj2driver directory will
+have slightly different output since many of the Makefile variables are created
+in the environment of the proj2tests Makefile, plus, only drivers will be
+compiled; 2) individually running shell tests (instead of ``make run`` or
+``make err``) may not succeed, as some rely on the `$(DRIVERS)` environment
+variable, which is also set by the proj2tests Makefile.
+
+TESTS
+
+*Tester's Note* System calls only listen to root, so you must use superuser
+privileges when running tests.
+
+There are two kinds of tests, functional and stress tests.  For each kind, there
+are one or more tests for each of the firewall and file access control systems,
+so they are identified with an "fw" or "fc" in the filename, after the test type
+prefix.  All tests use the 'assert' library to produce friendly output for the
+tester.  All of these test scripts rely on the programs in the proj2driver
+directory.
+
+Functional Test (t_*) - These scripts test general functionality of the firewall
+and file access control systems.  One test of this type, for each system, is a
+basic "sys" test; it will simply run the system call drivers and ensure there
+were no errors returned.
+
+Stress Tests (s_*) - These scripts perform lots of operations on the firewall
+and file access control systems.  The constants at the top of each script are
+used to change the amount of stress placed on the system, where a larger
+number/higher amount will result in a more stressful test.
+
+MAKEFILE RULES
+
+    - ``make`` or ``make all`` - compiles all tests, as well as any dependencies
+    - ``make driversonly`` - compiles required driver programs (in proj2driver)
+    - ``make run`` - run all tests
+    - ``make stress`` - run stress tests on the system (may take a while)
+
+SOURCES
+
+    - Makefiles sharing variables: https://stackoverflow.com/a/2826178
+    - Bash output redirection:
+        https://www.brianstorti.com/understanding-shell-script-idiom-redirect/
+    - Bash log2() function: https://bobcopeland.com/blog/2010/09/log2-in-bash/
+    - Bash for loops: https://www.cyberciti.biz/faq/bash-for-loop/

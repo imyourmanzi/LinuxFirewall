@@ -1,0 +1,10 @@
+msg_fmt,errno
+[Port/File] already blocked!,EEXIST
+[Port/File] not currently blocked!,ENOENT
+Unable to retrieve next [item]!,EFAULT
+Failed to allocate memory for [item]!,ENOMEM
+No [item]s are blocked!,ENODATA
+[parameter] must (not) be [property]!,EINVAL
+[parameter] must (not) be NULL!,EFAULT
+Unable to copy [item] into [item]!,EFAULT
+Invalid permissions to [action]!,EPERM
